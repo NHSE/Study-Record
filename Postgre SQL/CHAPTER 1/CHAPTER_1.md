@@ -44,6 +44,10 @@
 * 부모–자식 구조
 * 검색 속도 빠름
 * 다대다 구조 표현 불가
+  
+  <img width="343" height="306" alt="image" src="https://github.com/user-attachments/assets/49bf4242-8dea-4682-8775-eebc05f6e377" />
+
+
 
 #### 2) **네트워크형 Database**
 
@@ -51,11 +55,16 @@
 * 계층형의 단점 보완
 * IDS, IDMS 등에서 사용
 
+  <img width="402" height="328" alt="image" src="https://github.com/user-attachments/assets/8dcf7ad2-9283-467b-aef0-20bed5cc4a51" />
+
+
 #### 3) **관계형 Database(RDB)**
 
 * 2차원 테이블(행/열) 구조
 * SQL 사용
-* EX) Excel과 동일한 형태
+
+   <img width="330" height="274" alt="image" src="https://github.com/user-attachments/assets/1de338c1-061b-4778-a42d-fe0f2f49e12c" />
+
 
 ---
 
@@ -72,7 +81,8 @@
 
 ### 📌 PostgreSQL 계층 구조
 
-(사진 삽입 위치)
+<img width="529" height="284" alt="image" src="https://github.com/user-attachments/assets/ae9aa088-4278-4826-8ed6-7237ca7b3926" />
+
 
 * **Cluster** : Database들의 집합
 * **Schema** : 테이블·뷰·함수·인덱스 등 개체들의 논리적 그룹
@@ -317,3 +327,4 @@ DELETE FROM 테이블명;
 ```
 
 ---
+
