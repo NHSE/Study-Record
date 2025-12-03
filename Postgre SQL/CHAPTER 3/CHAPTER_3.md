@@ -1,313 +1,326 @@
 
-# 📘 CHAPTER 2 — Data Type
+# 📘 CHAPTER 3 — 연산자와 함수
 
-## 1. Data Type 기본 개념
+## 1. 연산자와 조건문 함수
 
-### 📌 데이터 타입(Data Type)이란?
+### 📌 논리 연산자, 비교 연산자, 범위 연산자
 
-테이블의 각 컬럼 속에 있는 데이터의 성질
+AND, OR, NOT으로 구성되어 있으며 True, False, Null 3개의 결과 값을 이루어져 있음
 
-- 숫자형 (Numeric Types)
+- 논리 연산자
 
-| Data Type      | 설명             | 크기        | 비고         |
-| -------- | -------------- |--------------------|--------------|
-|INTERGER        | C/C++ int와 같음    | 4bytes   |             |
-|NUMERIC(p,q)    | 소수점자리 표시 가능 | 가변적    |p는 전체 자릿 수, q는 소수점 자릿 수|
-|FLOAT           | 부동소수점을 사용    | 4bytes, 8bytes      |         |
-|SERIAL          | INTEGER 기본 값으로 1씩 추가되며 값이 자동 생성 | 4bytes      | PRIMARY KEY로 주로 사용|
+| A      | B             | A AND B        | A OR B         | NOT A |
+| -------- | -------------- |--------------------|--------------|-----|
+|T | T | T | T | F |
+|T | F | F | T | F |
+|T | NULL | NULL | T | F |
+|F | F | F | F | T |
+|F | NULL | F | NULL | T |
+|NULL | NULL | NULL | NULL | NULL|
 
-- 화폐형 (Monetary Types)
+- 비교 연산자
 
-| Data Type      | 설명             |
-| -------- | -------------- |
-|MONEY        | 정수 및 부동 소수점으로 표현 가능    |
-
-- 문자형 (Character Types)
-
-| Data Type      | 설명             |
-| -------- | -------------- |
-|VARCHAR(n)        | n 이하 문자의 길이 그대로 저장    |
-|CAHR(n)        | 문자 길이 + 공백 형태로 n에 맞추어 저장    |
-|TEXT        | 길이에 상관없이 모든 문자열을 저장 (= n을 쓰지 않은 VARCHAR)    |
-
-- 날짜 및 시간 (Date & Time)
-
-| Data Type      | 설명             | 크기        |
+| 연산자      | 설명             | 결과        |
 | -------- | -------------- |--------------------|
-|TIMESTAMP        | 현재 세계 표준시(UTC)    | 8bytes   |
-|TIMESTAMPTZ        | 세계 표준시 + 시간대 정보 반영 (한국은 GMT + 9)    | 8bytes  |
-|DATE        | 날짜 정보만 표시    | 4bytes  |
-|TIME        | 시간 정보만 표시, 시계표준시 (시간대 정보 반영 x)    | 8bytes  |
-|TIME WITH TIME ZONE       | 시간 정보만 표시, 시계표준시 + 시간대 정보 반영    | 12bytes  |
-
-- 불리언형 (Boolean Types)
-
-| Data Type      | 설명             |
-| -------- | -------------- |
-|TRUE        | True, yes, on, 1 모두 참    |
-|FALSE        | False, no, off, 0 모두 거짓    |
-|Null        | 알 수 없는 정보 또는 일부 불확실    |
-
-- 배열형 (Array Types)
-
-| Data Type      | 설명             | 비고         |
-| -------- | -------------- |--------------|
-|INTEGER[ ]        | INTEGER 형 배열    |'{1, 2}' or Array[1, 2] 로 표현 가능 |
-|VARCHAR[ ]        | VARCHAR 형 배열    ||
-|BOOLEAN[ ]        | BOOLEAN 형 배열    ||
-
-- 제이슨형 (Json Types)
-
-| Data Type      | 장점             | 단점        | 비고         |
-| -------- | -------------- |--------------------|--------------|
-|JSON        | 입력한 텍스트의 정확한 사본 생성    | 처리 속도가 느림  | {"키 값" : "Value 값"}            |
-|JSONB        | 처리 속도가 비교적 빠름    | 데이터 저장 속도가 느림  |             |
-
-### 📌 Data Type 변경
-
-- CAST 연산자 : 
+|<불리언 표현식> IS TRUE        | <불리언 표현식>이 참이다.    | 참 또는 거짓   |
+|<불리언 표현식> IS NOT TRUE    | <불리언 표현식>이 참이 아니다.    | 참 또는 거짓  |
+|<불리언 표현식> IS FALSE       | <불리언 표현식>이 거짓이다.    | 참 또는 거짓  |
+|<불리언 표현식> IS NOT FALSE   | <불리언 표현식>이 거짓이 아니다.    | 참 또는 거짓  |
+|<불리언 표현식> IS NULL        | <불리언 표현식>이 NULL이다.    | 참 또는 거짓  |
+|<불리언 표현식> IS NOT NULL    | <불리언 표현식>이 NULL이 아니다.    | 참 또는 거짓  |
 
 ```sql
-CAST (표현식 AS 바꿀 데이터 타입)
+SELECT * FROM 테이블명 WHERE A IS FALSE;
+```
+
+
+- 범위 연산자
+
+| 연산자      | 설명             |
+| -------- | -------------- |
+|BETWEEN        | A 이상 B 이하의 범위    |
+|NOT BETWEEN    | A 초과 B 미만의 범위    |
+
+```sql
+// (1 <= A AND A <= 10)
+SELECT * FROM 테이블명 WHERE BETWEEN 1 AND 9;
+
+// (1 < A AND A < 10)
+SELECT * FROM 테이블명 WHERE NOT BETWEEN 1 AND 9;
+```
+
+---
+
+### 📌 조건문 함수
+
+- CASE : IF-ELSE 문과 대응되며 C/C++의 swtich-case문과 동일
+
+```sql
+CASE
+    WHEN <조건문> THEN <결과문>
+    WHEN <조건문> THEN <결과문>
+    ELSE <결과문>
+END
 
 /*
 ex)
-SELECT CAST('2020-08-11' AS TEXT)
+CASE
+    WHEN score <= 100 AND score >= 90 THEN 'A'
+    WHEN score <= 89 AND score >= 80 THEN 'B'
+    WHEN score <= 79 AND score >= 70 THEN 'C'
+    ELSE 'F'
+END grade
 */
 ```
 
-- CAST 형 연산자
+- COALESCE : NULL 값을 다른 기본 값으로 대체될 때 사용
 
 ```sql
-SELECT 표현식 :: 바꿀 데이터 타입
+COALESCE(컬럼1, 값1);
 
 /*
-SELECT '2020-08-11'::TEXT
+COALESCE(score, 0),
+CASE
+    WHEN score <= 100 AND score >= 90 THEN 'A'
+    WHEN score <= 89 AND score >= 80 THEN 'B'
+    WHEN score <= 79 AND score >= 70 THEN 'C'
+    ELSE 'F'
+END grade
+
+--> score가 NULL 값이라면 0으로 변경
+*/
+```
+
+- NULLIS : 값 1, 값 2가 같을 경우 NULL 반환, 다를 경우 값 1 반환
+
+```sql
+NULLIF (값 1, 값 2);
+
+/*
+SELECT students, COALESCE((12/NULLIF(students, 0))::char, '나눌 수 없음') AS share
+FROM A;
+
+--> NULLIF의 값 1과 값 2가 같을 경우 NULL을 반환하여 COALESCE의 두번째 값을 share에 저장
 */
 ```
 
 ---
 
-## 2. Data Type 무결성
+## 2. 배열 연산자와 함수
 
-### 📌 무결성이란?
+### 📌 배열 연산자
 
-DataBase 내에 정확하고 유효한 데이터만을 유지시키는 속성이며, DBMS 기능 내 제어 기능에 포함됨
+| 연산자 | 설명 | 예시 | 결과 |
+|-----|-----|-----|-----|
+| <@ 또는 @>        | 포함관계    | ARRAY[1, 2, 3] @> ARRAY[1, 3]   | 참 |
+| &&    | 겹침 유/무    | ARRAY[1, 2, 3, 4] && ARRAY[1, 5, 6] | 참 |
 
-1. 개체 무결성 (Entity integrity)
+### \|\| 연산자
+| 설명 | 예시 | 결과 |
+|------|------|-------|
+| 배열끼리 병합 | ARRAY[1,2,3] \|\| ARRAY[1,3] | {1,2,3,1,3} |
 
-      모든 테이블이 Primary Key를 가져야하며 선택된 컬럼은 고유하고 NULL 값을 허용하지 않아야 한다는 속성
+| 설명 | 예시 | 결과 |
+|------|------|-------|
+| 2차원 배열 병합 | ARRAY[[1,2,3],[4,5,6]] \|\| ARRAY[7,8,9] | {{1,2,3},{4,5,6},{7,8,9}} |
 
-
-2. 참조 무결성 (Referential integrity)
-      
-     외래 키(Foreign Key) 값이 null 값이거나 참조된 테이블의 기본 키 값과 동일
-
-
-3. 범위 무결성 (Domain integrity)
-
-     사용자가 정의한 Domain 내에서 관계형 DataBase의 모든 열을 정의하도록 규정
-
-      ```sql
-      CREATE DOMAIN 도메인명 AS 데이터 타입 CHECK (제약 조건)
-
-      /*
-      CREATE DOMAIN test AS integer CHECK (VALUE > 0 AND VALUE < 9)
-      */
-      ```
+| 설명 | 예시 | 결과 |
+|------|------|-------|
+| 원소 배열 병합 | 1 \|\| ARRAY[2,3,4] | {1,2,3,4} |
 
 
----
+### 📌 배열 함수
 
-### 📌 Column 값 제한
+| 함수 | 설명 | 예시 | 결과 |
+|------|------|-------|------|
+| array_append() | 배열에 맨 뒤에 원소를 추가 | array_append(ARRAY[1, 2], 3) | {1, 2, 3} |
+| array_prepend() | 배열에 맨 앞에 원소를 추가 | array_prepend(1, ARRAY[2, 3]) | {1, 2, 3} |
+| array_remove() | 배열의 특정 원소를 삭제 | array_remove(ARRAY[1, 2], 1) | { 2 } |
+| array_replace() | 배열의 특정 원소를 다른 원소와 대체 | array_replace(ARRAY[1, 3], 3, 2) | {1, 2} |
+| array_cat() | 두 배열을 병합 | array_cat(ARRAY[1, 2], ARRAY[3, 4]) | {1, 2, 3, 4} |
 
-#### 1) **NOT NULL 제약조건**
+## 3. JSON 연산자와 함수
 
-* 빈 값을 허용하지 않는 조건
-* Null 값이 입력되면 오류 발생
+### 📌 JSON 연산자
+
+| 연산자      | 설명             | 결과        |
+| -------- | -------------- |--------------------|
+|->        |JSON 오브젝트에서 키 값으로 밸류 값을 불러오기 or JSON 배열에서 인덱스로 JSON 오브젝트 불러오기    | JSON |
+|->>    | JSON 오브젝트, JSON 배열 속 데이터 텍스트로 불러오기    | TEXT |
+|#>       | 특정한 경로의 값을 가져옴    | JSON |
+|#>>   | 특정한 경로의 값을 TEXT 데이터 타입으로 가져옴    | TEXT |
+
 
 ```sql
-Column DataType NOT NULL
-/*
-CREATE TABLE A
-(
-   id NUMERIC(3) NOT NULL,
-   email TEXT NOT NULL
-);
-*/
-```
 
-#### 2) **UNIQUE 제약조건**
+// ->
+SELECT '{"p": {"1" : "postgres"}, "s" : {"1" : "sql"}}'::json -> 'p' AS result;
 
-* 테이블 내에서 유일한 값을 가짐
+result
+---------------
+{"1" : "postgres"}
 
-```sql
-Column DataType UNIQUE NOT NULL
-/*
-CREATE TABLE A
-(
-   id NUMERIC(3) UNIQUE NOT NULL,
-   email TEXT UNIQUE NOT NULL
-);
+Type : Json
 
-or
+// ->>
+SELECT '{"p": {"1" : "postgres"}, "s" : {"1" : "sql"}}'::json ->> 'p' AS result;
 
-CREATE TABLE A
-(
-   id NUMERIC(3) NOT NULL,
-   email TEXT NOT NULL,
-   UNIQUE (id, email)
-);
-*/
-```
+result
+---------------
+{"1" : "postgres"}
 
-#### 3) **PRIMARY KEY**
+Type : TEXT
 
-* 주 식별자, 주 키 또는 줄여서 PK라고 칭함
-* PK의 Column 값은 서로 달라야하며, Null 값을 허용하지 않음 ( = UNIQUE NOT NULL)
+// #>
+SELECT '{"post": [{"gre": {"sql":"do it"}}, {"t":"sql"}]}'::json #> '{"post",1,"t"}' AS result;
 
-```sql
-Column DataType NOT NULL PRIMARY KEY
+result
+---------------
+"sql"
 
-/*
-CREATE TABLE A
-(
-   id NUMERIC(3) NOT NULL PRIMARY KEY,
-   email TEXT NOT NULL PRIMARY KEY
-);
+Type : Json
 
-or
+// #>>
+SELECT '{"post": [{"gre": {"sql":"do it"}}, {"t":"sql"}]}'::json #>> '{"post",1,"t"}' AS result;
 
-CREATE TABLE A
-(
-   id NUMERIC(3) NOT NULL,
-   email TEXT NOT NULL,
-   PRIMARY KEY (id, email)
-);
-*/
-```
+result
+---------------
+"sql"
 
+Type : TEXT
 
-#### 4) **Foreign Key (외래키)**
-
-* 외래키 제약조건은 다음과 같은 규칙을 따름
-
-   1. 부모 테이블이 자식 테이블 보다 먼저 생성되어야 함.
-   2. 부모 테이블은 자식 테이블과 같은 DataType을 가져야 함.
-   3. 부모 테이블에서 참조 된 Column 값만 자식 테이블에서 입력 가능
-   4. 참조되는 Column은 모두 Primary Key이거나 UNIQUE 제약조건 형식이여야 함
-
-```sql
-Column DataType NOT NULL REFERENCES parents_table_name
-
-/*
-CREATE TABLE subject
-(
-   subj_id NUMERIC(5) NOT NULL PRIMARY KEY,
-   subj_name VARCHAR(60) NOT NULL
-)
-
-INSERT INTO subject VALUES (00001, 'A'), (00002, 'B')
-
-CREATE TABLE teacher
-(
-   subj_id NUMERIC(5) REFENCES subject
-   subj_name VARCHAR(60) REFENCES subject
-);
-
-or
-
-// Column명이 다를 경우
-CREATE TABLE teacher
-(
-   id NUMERIC(5) REFENCES subject(subj_id)
-   name VARCHAR(60) REFENCES subject(subj_name)
-);
-
-// 여러개의 경우
-FOREIGN KEY (id, name) REFERENCES subject (subj_id, subj_name)
-*/
-```
-
-외래키 ON DELETE의 다섯가지 유형
-
-| 유형           | 설명              | 비고  |
-|----------------|------------------|------|
-| ON DELETE NO ACTION | Default로 설정되어 있으며, 부모 Column을 지울 수 없음 | |
-| ON DELETE RESTRICT | 부모 Column을 지울 수 없음 | id NUMERIC(5) REFERENCES A ON DELETE RESTRICT |
-| ON DELETE SET NULL | 부모 Column을 지우고 자식 Table 내 해당 Column을 참조한 해당 값들을 모두 NULL로 변경 | id NUMERIC(5) REFERENCES A ON DELETE SET NULL |
-| ON DELETE CASCADE | 부모 Column을 지우고 자식 Table 내 해당 Column을 참조한 해당 열을 모두 지움 | id NUMERIC(5) REFERENCES A ON DELETE CASCADE |
-| ON DELETE SET DEFAULT | 부모 Column을 지우고 자식 Table 내 해당 Column을 참조한 해당 값들을 모두 설정 값으로 변경 | id NUMERIC(5) DEFAULT 1 REFERENCES A ON DELETE DEFAULT |
-
-#### 5) **CHECK 제약조건**
- * 가장 일반적인 제약 조건이며, CHECK 뒤에 나오는 식이 BOOLEAN 타입의 True를 만족해야함
-
-```sql
-CREATE DOMAIN Domain_Name AS DataType CHECK (제약조건)
-
-/*
-CREATE DOMAIN A AS integer CHECK (VALUE >= 0 AND VALUE <= 9) --> 0 이상 9 이하의 수 만 입력 가능 조건
-*/
-```
----
-
-## 3. Alter Table
-
-### 📌 만들어진 테이블에 컬럼 추가
-
-```sql
-ALTER TABLE 테이블명 ADD COLUMN 컬럼명 데이터타입 제약조건;
-
-/*
-ALTER TABLE a ADD COLUMN A INTEGER NOT NULL;
-*/
 ```
 
 ---
 
-### 📌 만들어진 테이블에 컬럼 삭제
+### 📌 JSON 생성함수
+
+| 연산자      | 설명             |
+| -------- | -------------- |
+|json_build_object()        | JSON 오브젝트 생성 함수    |
+|json_build_array()    | JSON 배열 생성 함수    |
+|json_array_length()       | 배열의 원소의 개수 체크 함수    |
+|json_array_elements()   | 배열의 원소를 컬럼으로 출력    |
+|json_each()   | 키 값과 밸류 값을 기준으로 출력    |
 
 ```sql
-ALTER TABLE 테이블명 DROP COLUMN 컬럼명;
+// json_build_object()
+SELECT json_build_object('a', 1, 'b', 2) AS result;
+
+result
+---------------
+{"a" : 1, "b" : 2}
+
+Type : JSON
+
+// json_build_array()
+SELECT json_build_array('a', 1, 'b', 2) AS result;
+
+result
+---------------
+["a", 1 , "b", 2, "c"]
+
+Type : JSON
+
+// json_array_length()
+SELECT json_array_length('["a", 1, "b", 2, "c"]'::json) AS result;
+
+result
+---------------
+5
+
+Type : Integer
+
+// json_array_elements()
+SELECT json_array_elements('[1,"a",{"b":"c"}, ["d", 2, 3]]') AS result;
+
+result
+---------------
+1
+"a"
+{"b":"c"}
+["d", 2, 3]
+
+Type : JSON
+
 /*
-ALTER TABLE a DROP COLUMN A;
+SELECT comments->'username' AS username, comments->'contents' AS contests 
+FROM 
+     json_array_elements('[{"username" : "전우치", "contents" : "댓글 내용"}, 
+                           {"username" : "서화담", "contents" : "댓글 내용"}]') comments;
 
-or
 
-ALTER TABLE a DROP COLUMN A CASCADE;
 */
+username | contests
+---------+----------
+"전우치" | "댓글 내용"
+"서화담" | "댓글 내용"
+
+// json_each()
+SELECT * FROM json_each('{"sujin" : "i like postgresql", "Siyoun":"i like postgresql too"}');
+
+ Key     | Value
+---------+----------
+"sujin"  | "i like postgresql"
+"Siyoun" | "i like postgresql too"
 ```
 
 ---
-### 📌 만들어진 테이블에 컬럼명 변경
+## 4. 자주 쓰이는 연산자와 함수
+### 📌 서브쿼리 연산자
+
+| 연산자      | 설명             | 결과        |
+| -------- | -------------- |--------------------|
+|EXISTS(서브쿼리)        | 서브쿼리의 로우가 존재하면 참    | 참 또는 거짓, NULL |
+|<표현> IN (서브쿼리)    | 서브쿼리의 로우 값 중 하나라도 표현식과 같다면 참 | 참 또는 거짓, NULL |
+|<표현> NOT IN (서브쿼리)       | 서브쿼리의 로우 값 중 하나라도 다르면 표현식과 같다면 참 | 참 또는 거짓, NULL |
+|<표현> <비교 연산자> ANY (서브쿼리)   | 서브쿼리의 로우 값 중 하나라도 표현식과 같다면 참 | 참 또는 거짓, NULL |
+|<표현> <비교 연산자> ALL (서브쿼리)   | 서브쿼리의 로우 값 모두가 표현식과 같다면 참 | 참 또는 거짓, NULL |
 
 ```sql
-ALTER TABLE 테이블명 RENAME 기존컬럼명 TO 새컬럼명;
+// EXISTS
+SELECT * FROM A
+WHERE EXISTS ( SELECT * FROM B );
+
+// --> B 테이블 내 데이터 존재 시 A 테이블 출력
+// --> B 테이블 내 데이터 존재하지 않을 경우 출력되지 않음
+
+// IN
+SELECT * FROM A
+WHERE A IN ( 10, 20, 30 );
+
+-------
+id | name | amount
+---+-------+-------
+1  | apple | 30
+2  | melon | 10
+3  | kiwi  | 30
+
+// --> A 테이블 내 10, 20, 30의 값을 가진 로우만 출력
+
+// NOT IN
+SELECT * FROM A
+WHERE A NOT IN ( 10, 20, 30 );
+
+-------
+id |  name      | amount
+---+------------+-------
+4  | banana     | 23
+5  | strawberry | 43
+
+// --> A 테이블 내 10, 20, 30의 값을 가지지 않은 로우만 출력
+
+// ANY
+SELECT * FROM A
+WHERE 10 = ANY ( SELECT b FROM B );
+
+// --> B 테이블 내 b(컬럼) 중 10이라는 로우 존재 시 True, 없을 경우 False 반환
+
+// ALL
+SELECT * FROM A
+WHERE 10 <= ALL ( SELECT b FROM B );
+
+// --> B 테이블의 b 컬럼 로우 값이 모두 10보다 크거나 같을 경우 True, 다를 경우 False 반환
 ```
 
----
-### 📌 만들어진 테이블에 제약조건 추가 및 제거
-
-```sql
-//추가
-ALTER TABLE 테이블명 ALTER COLUMN 컬럼명 SET NOT NULL;
-
-//제거
-ALTER TABLE 테이블명 ALTER COLUMN 컬럼명 DROP NOT NULL;
-
-//Primary Key 추가
-ALTER TABLE 테이블명 ADD PRIMARY KEY (컬럼명);
-
-//외래키 제약조건 추가
-ALTER TABLE 자식테이블명 ADD FOREIGN KEY (자식컬럼명) REFERENCES 부모테이블명 (부모컬럼명);
-```
-
----
-### 📌 만들어진 테이블에 DataType 변경
-
-```sql
-ALTER TABLE 테이블명
-ALTER COLUMN 컬럼명 TYPE 새로운 데이터 타입
-
-```
 ---
