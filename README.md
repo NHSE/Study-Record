@@ -11,5 +11,8 @@
 - **CHAPTER 2 — Data Type**  
   ➡️ [바로가기](./Postgre%20SQL/CHAPTER%202/CHAPTER_2.md)
 
+- **CHAPTER 3 — 연산자와 함수**  
+  ➡️ [바로가기](./Postgre%20SQL/CHAPTER%203/CHAPTER_3.md)
+
 ---
 
