@@ -17,5 +17,8 @@
 - **CHAPTER 4 — 데이터의 집계 및 결합 Part.1**  
   ➡️ [바로가기](./Postgre%20SQL/CHAPTER%204/CHAPTER_4.md)
 
+- **CHAPTER 5 — 데이터의 집계 및 결합 Part.2**  
+  ➡️ [바로가기](./Postgre%20SQL/CHAPTER%205/CHAPTER_5.md)
+
 ---
 
