@@ -1,244 +1,149 @@
 
-# 📘 CHAPTER 5 — 데이터의 집계 및 결합 Part.2
+# 📘 CHAPTER 6 — 데이터 모델링과 인덱
 
-## 1. 여러 개의 테이블 로우로 연결하기
+## 1. 테이블 사이의 관계
 
-### 📌 UNION, UNION ALL
+### 📌 1 : N (일대다 관계)
 
-UNION : 중복을 제거하고 로우를 결합
+**하나의 테이블이 다른 테이블에 속하는 관계**이며, 한 개의 Row가 다른 테이블의 여러개의 Row와 연결되는 관계
 
-UNION ALL : 중복을 제거하지 않고 로우을 결합
+<img width="500" height="353" alt="image" src="https://github.com/user-attachments/assets/91863fec-cc38-4672-a267-5091fa3573d8" />
 
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/5aa4fc96-8173-42e5-8aab-307e0af0450d" />
 
-```sql
-SELECT * FROM 테이블명 UNION SELECT * FROM 테이블명
+ex)
 
-SELECT * FROM 테이블명 UNION ALL SELECT * FROM 테이블명
-/*
-A | item_column_1
-  |       a
-  |       b
-  |       c
+국가(1) - 도시(N) : 일반적으로(도시 국가 제외) 한 국가에 여러 도시가 있으며, 각각의 도시는 한 국가에 속해있다.
 
-B | item_column_2
-  |       a
-  |       b
+부모(1) - 자식(N) : 일반적으로 각 자식은 한 쌍의 부모가 있지만 각 부모는 여러 자녀를 가질 수 있다.
 
-SELECT * FROM A UNION SELECT * FROM B
+직원(N) - 관리자(1) : 각 직원에게는 한 명의 직속 상사 또는 관리자가 있지만 일반적으로 각 관리자는 많은 직원을 감독한다.
 
-result
-----------------
-a
-b
-c
 
-SELECT * FROM A UNION ALL SELECT * FROM B
+### 📌 N : N (다대다 관계)
 
-result
-----------------
-a
-a
-b
-b
-c
+**두 개의 테이블이 서로의 행에 대해서 여러 개로 연관**되어 있는 상태
 
-*/
-```
+실무에서는 다대다 테이블을 사용하지 않는다. 
+
+관계형 데이터베이스는 정규화된 테이블의 집합이기 때문에 2개의 테이블로 다대다 관계를 표현할 수 없다. 
+
+따라서 각 테이블의 PK를 외래키(FK)로 참조하고 있는 연결 테이블(매핑 테이블)을 추가하여 일대다, 다대일의 관계로 풀어내야 한다.
+
+<img width="600" height="207" alt="image" src="https://github.com/user-attachments/assets/0fc75e1d-5619-4443-a2e5-8127f897fe90" />
+
+
+### 📌 1 : 1 (일대일 관계)
+
+두 테이블의 Row가 정확히 **일대일 매칭**이 되는 관계 (ex. 사람 - 주민등록번호)
 
 ---
 
-### 📌 INTERSECT, INTERSECT ALL
+## 2. 정규화와 비정규화
 
-INTERSECT : 중복되는 로우 한번만 출력
+### 📌 정규화
 
-INTERSECT ALL : 중복되는 로우 모두 출력
+정규화란 데이터의 **중복성을 제거하거나** 줄이기 위해 데이터를 구성하는 과정
 
-<img width="317" height="329" alt="image" src="https://github.com/user-attachments/assets/0e3be24d-9027-433d-8978-47c49e5c660a" />
+예시 ) 
 
-```sql
-(SELECT 컬럼명 FROM 테이블명) INTERSECT (SELECT 컬럼명 FROM 테이블명)
+<img width="500" height="442" alt="image" src="https://github.com/user-attachments/assets/8841f394-c3da-48d0-b003-0d36584bb0bf" />
 
-(SELECT 컬럼명 FROM 테이블명) INTERSECT ALL (SELECT 컬럼명 FROM 테이블명)
+이렇게 구매한 커피가 정리되어 있을 경우 몇가지의 단점이 있음.
+1. 중복된 정보가 많아서 데이터가 비효율적으로 많이 저장되어 있음.
+2. 중복된 정보 사이에 실수로 오류가 발생할 확률이 높음.
+3. 특정 구매 이력의 고유 값이 없어서 어떤 내역을 간단하게 특정 지을 수 없음.
 
-/*
---------
-A | item_column_1
-  |       a
-  |       b
-  |       c
 
-B | item_column_2
-  |       a
-  |       b
+<img width="700" height="642" alt="image" src="https://github.com/user-attachments/assets/4c362618-5346-4579-bc0e-439151728186" />
 
-(SELECT item_column_1 FROM A) INTERSECT (SELECT item_column_2 FROM B)
+하나의 테이블을 정규화 하게되면 이와 같이 3개의 테이블로 나누어지고 각각의 테이블에 고유 키 id 값을 추가함.
+데이터의 중복이 최소화되어 있고, 더 적은 양의 데이터로 같은 내용을 저장함.
 
-result
------------
-a
-b
+### 📌 비정규화
+비정규화란 데이터의 **중복성을 제거하지 않고** 데이터를 구성하는 과정
 
-(SELECT item_column_1 FROM A) INTERSECT ALL (SELECT item_column_2 FROM B)
+비정규화를 하게되는 상황
+1. 자주 함께 조회하는 테이블
+2. 집계 연산이 빈번하게 일어나는 상황
+3. 자주 조회하지 않는 정보가 포함된 테이블이 있는 경우
 
-result
------------
-a
-a
-b
-b
-*/
-```
-
-### 📌 EXCEPT, EXCEPT ALL
-
-EXCEPT : 두 테이블의 로우 정보 중 중복되지 않은 부분만을 중복없이 출력
-
-EXCEPT ALL : 두 테이블의 로우 정보 중 중복되지 않은 부분만을 그대로 출력
-
-<img width="317" height="327" alt="image" src="https://github.com/user-attachments/assets/513296be-af37-4415-bf33-4fdda18b5004" />
-
-```sql
-(SELECT 컬럼명 FROM 테이블명) EXCEPT (SELECT 컬럼명 FROM 테이블명)
-
-(SELECT 컬럼명 FROM 테이블명) EXCEPT ALL (SELECT 컬럼명 FROM 테이블명)
-
-/*
---------
-(SELECT item_column_1 FROM A) EXCEPT (SELECT item_column_2 FROM B)
-
-(SELECT item_column_1 FROM A) EXCEPT ALL (SELECT item_column_2 FROM B)
-
-*/
-```
-
-## 2. 여러 개의 테이블 컬럼으로 연결하기
-
-### 📌 FROM과 WHERE을 이용한 데이터 결합
-
-두 테이블의 각각의 로우가 서로 한번씩 결합시키는 교차 조인하여 WHERE로 원하는 조건을 통해 출력
-
-```sql
-
-SELECT * FROM 테이블명1, 테이블명2
-WHERE <조건문>
-
-/*
-A |   id
-  |    a
-  |    b
-  |    c
-
-B | item_id | item_type
-  |    a    |   'asd'
-  |    b    |   'dsa'
-
-SELECT * FROM A, B
-WHERE A.id = B.item_id AND B.item_type = 'asd'
-
-id | item_id | item_type
----+---------+-----------
-a  |    a    |   'asd'
-*/
-              
-```
-
-### 📌 JOIN을 이용한 데이터 결합
-FROM - WHERE을 JOIN - ON으로 변경 가능
-
-<img width="808" height="348" alt="image" src="https://github.com/user-attachments/assets/5f346c2e-5fc1-4a90-806e-0d32b972f9c0" />
-
-```sql
-SELECT * FROM A, B
-WHERE A.id = B.item_id AND B.item_type = 'asd'
-
-->
-
-SELECT * FROM 
-( 
-   A JOIN B
-   ON A.id = B.item_id AND B.item_type = 'asd'
-);
-```
-
-| 함수 | 축약형 | 내부/외부 구분 |
+### 📌 정규화 vs 비정규화
+| 특징 | 정규화 | 비정규화 |
 |------|------|-------|
-| INNER JOIN | JOIN | 내부 |
-| LEFT OUTER JOIN | LEFT JOIN | 외부 |
-| RIGHT OUTER JOIN | RIGHT JOIN | 외부 |
-| FULL OUTER JOIN | FULL JOIN | 외부 |
+| 정보가 테이블에 분산된 정도 | 많이 분산됨 | 적게 분산됨 |
+| 조회 속도 | 느림 | 빠름 |
+| 쓰기 속도 | 빠름 | 느림 |
+| 데이터 무결성 | 깨지지 않음 | 깨질 수 있음 |
 
-```sql
-
-SELECT * FROM 
-( 
-   테이블명1 JOIN or LEFT JOIN or RIGHT JOIN or FULL JOIN 테이블명2
-   ON <조건문>
-);
-
-/*
-A |   id
-  |    a
-  |    b
-  |    c
-
-B | item_id | item_type
-  |    a    |   'asd'
-  |    b    |   'asd'
-  |    e    |   'dsa'
-
-// JOIN
-SELECT * FROM 
-( 
-   A JOIN B
-   ON A.id = B.item_id AND B.item_type = 'asd'
-);
-
-id | item_id | item_type
----+---------+-----------
-a  |    a    |   'asd'
-b  |    b    |   'asd'
-
-// LEFT JOIN
-SELECT * FROM 
-( 
-   A LEFT JOIN B
-   ON A.id = B.item_id AND B.item_type = 'asd'
-);
-
-id | item_id | item_type
----+---------+-----------
-a  |    a    |   'asd'
-b  |    b    |   'asd'
-c  |   null  |    null
-
-// RIGHT JOIN
-SELECT * FROM 
-( 
-   A RIGHT JOIN B
-   ON A.id = B.item_id AND B.item_type = 'asd'
-);
-
-id    | item_id | item_type
-------+---------+-----------
-a     |    a    |   'asd'
-b     |    b    |   'asd'
-null  |    e    |   'dsa'
-
-// FULL JOIN
-SELECT * FROM 
-( 
-   A FULL JOIN B
-   ON A.id = B.item_id AND B.item_type = 'asd'
-);
-
-id    | item_id | item_type
-------+---------+-----------
-a     |    a    |   'asd'
-b     |    b    |   'asd'
-c     |   null  |    null
-null  |    e    |   'dsa'
-
-*/
-```
 ---
+## 3. 인덱싱
+### 📌 인덱스의 특징
+1. 쿼리를 수행할 때 인덱스가 없다면 모든 Row를 일일이 조회해야함. 따라서 인덱싱을 통해 쿼리 작업을 **매우 효율적**으로 만듦.
+2. 인덱스 생성 시 Row를 생성, 제거하는 작업을 빈번하게 할 때 **속도 저하**가 일어날 수 있음.
+3. **단순 인덱스**를 만들면 해당 컬럼만 조회할 때 사용할 수 있고, 다수의 컬럼을 대상으로 조회할 경우 **복합 인덱스**가 효율적임.
+4. 복합 인덱스는 **순서**가 중요함.
+
+### 📌 인덱스의 종류
+
+- **B-Tree**
+
+  <img width="700" height="344" alt="image" src="https://github.com/user-attachments/assets/04130ad8-7d2f-4e7b-8a9c-22ca2d3f6f76" />
+      
+  B-Tree 방식은 가장 기본적인 형태의 인덱스임.
+
+  PostgreSQL은 프라이머리 키를 생성하면 자동으로 B-Tree 방식의 인덱스를 생성함.
+
+- **Hash**
+
+  <img width="700" height="304" alt="image" src="https://github.com/user-attachments/assets/025bb265-da02-447b-ae8a-1245aa965cb4" />
+
+  값을 직접 인덱싱하지 않고 값을 해시화 함수를 통해 더 작은 크기의 값으로 변형한 뒤 이 값을 기준으로 B-Tree 구조를 만듦.
+
+  인덱스 값이 데이터 값에 대한 키로 동작하므로 매우 빠른 데이터 액세스가 가능.
+
+  ```sql
+  CREATE INDEX hash_idx ON 테이블명 USING HASH(컬럼명)
+  ```
+
+- **Generalized Inverted Index (GIN)**
+
+  LIKE 연산자나 tsvector 관련 연산을 할 때 효율적인 검색이 가능하게 하는 인덱스. (전문 검색)
+
+  ```sql
+  CREATE INDEX gin_idx ON 테이블명 USING GIN(to_tsvector(언어 분석 규칙 이름, 찾을 컬럼명));
+  SELECT * FROM 테이블명 WHERE to_tsvector(언어 분석 규칙 이름, 찾을 컬럼명) @@ to_tsquery('찾을 문자열');
+
+  /* 언어 분석 규칙 이름
+  english : 영어
+  -> a, an, the 와 같은 불용어와 studying -> study와 같은 어간을 추출함
+
+  simple : 최소한의 문자열 분리
+  -> a, an, the 와 같은 불용어와 studying -> study와 같은 어간을 추출하지 않음
+  */
+  ```
+
+- **단일 컬럼 인덱스**
+
+  한 가지 종류의 인덱스 컬럼 값을 갖는 방식.
+
+  ```sql
+  CREATE INDEX name_idx ON 테이블명(컬럼명);
+
+  // CREATE INDEX name_idx ON A(a);
+  ```
+
+- **복합 컬럼 인덱스**
+
+  두 개 이상의 컬럼을 묶어서 만든 인덱스
+
+  | 구분     | 단일 인덱스           | 복합 인덱스                       |
+  | ------ | ---------------- | ---------------------------- |
+  | 대상 컬럼  | 1개               | 2개 이상                        |
+  | 검색 예   | `WHERE 컬럼명 = ...` | `WHERE 컬럼명 1 = ... AND 컬럼명 2 = ...` |
+  | 순서 중요? | ❌ 상관 없음          | ✅ 왼쪽부터 순서 중요                 |
+
+  ```sql
+  CREATE INDEX item_idx ON 테이블명(컬럼명 방향, 컬럼명, 방향)
+
+  // CREATE INDEX item_idx ON A(a ASC, b DESC);
+  ```
