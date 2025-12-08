@@ -20,5 +20,9 @@
 - **CHAPTER 5 — 데이터의 집계 및 결합 Part.2**  
   ➡️ [바로가기](./Postgre%20SQL/CHAPTER%205/CHAPTER_5.md)
 
+- **CHAPTER 6 — 데이터 모델링과 인덱싱**  
+  ➡️ [바로가기](./Postgre%20SQL/CHAPTER%206/CHAPTER_6.md)
+
+
 ---
 
