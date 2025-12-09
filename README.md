@@ -23,6 +23,7 @@
 - **CHAPTER 6 — 데이터 모델링과 인덱싱**  
   ➡️ [바로가기](./Postgre%20SQL/CHAPTER%206/CHAPTER_6.md)
 
-
+- **CHAPTER 7 — 함수와 뷰**  
+  ➡️ [바로가기](./Postgre%20SQL/CHAPTER%207/CHAPTER_7.md)
 ---
 
