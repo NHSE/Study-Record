@@ -25,5 +25,8 @@
 
 - **CHAPTER 7 — 함수와 뷰**  
   ➡️ [바로가기](./Postgre%20SQL/CHAPTER%207/CHAPTER_7.md)
+
+- **CHAPTER 8 — 트랜잭션**  
+  ➡️ [바로가기](./Postgre%20SQL/CHAPTER%208/CHAPTER_8.md)
 ---
 
