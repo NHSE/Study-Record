@@ -3,6 +3,8 @@
 
 다음 모델을 바탕으로 데이터 베이스를 설계할 것이다.
 
+<img width="1599" height="1187" alt="image" src="https://github.com/user-attachments/assets/6a8bad1f-473d-42ff-a6f7-2c47eb1a88f1" />
+
 ## 문제 1. 국가 테이블 생성
 
 상기의 그림을 보고 국가 테이블을 만들어라.
