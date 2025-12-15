@@ -24,5 +24,7 @@
 |-----------|-----------|
 | PROBLEM 1 | ➡️ [바로가기](./Postgre%20SQL/PROBLEM/PROBLEM_1.md) |
 | PROBLEM 2 | ➡️ [바로가기](./Postgre%20SQL/PROBLEM/PROBLEM_2.md) |
+| PROBLEM 3 | ➡️ [바로가기](./Postgre%20SQL/PROBLEM/PROBLEM_3.md) |
+| PROBLEM 4 | ➡️ [바로가기](./Postgre%20SQL/PROBLEM/PROBLEM_4.md) |
 
 ---
