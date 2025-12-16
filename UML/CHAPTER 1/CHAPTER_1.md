@@ -13,7 +13,9 @@
 
 `(참고 : 오퍼레이션은 realization이 아닌 선언 정도, 메서드는 특정 언어로 구현된 실제 코드를 의미)`
 
-<사진첨부>
+<p align="center">
+	<img width="352" height="377" alt="image" src="https://github.com/user-attachments/assets/abcdc5ce-771e-4af6-97d8-8feb1676e272" />
+</p>
 
 operation의 밑줄은 static 메서드를 의미하고 기울임 글꼴은 추상 메서드를 의미한다.
 
@@ -27,13 +29,17 @@ attribute 앞의 기호는 visibility를 나타낸다.
 
 인터페이스와 추상 클래스는 다음과 같이 나타낼 수 있다.
 
-<사진첨부>
+<p align="center">
+	<img width="300" height="398" alt="image" src="https://github.com/user-attachments/assets/0381e3cc-c118-4997-a2a4-58ab101a82db" />
+</p>
 
 ##  클래스 관계 (Class Relationships)
 
 클래스 다이어그램에서 클래스 간의 관계는 다양한 형태가 있다.
 
-<사진첨부>
+<p align="center">
+	<img width="500" height="375" alt="image" src="https://github.com/user-attachments/assets/fa7a2041-5ce3-42a6-b123-ea30eef91e92" />
+</p>
 
 ### 📌 Dependency (의존 관계)
 
@@ -47,7 +53,10 @@ attribute 앞의 기호는 visibility를 나타낸다.
 
 이런 경우, `classB`가 `classA`에 의존한다고 할 수 있다.
 
-<사진첨부>
+<p align="center">
+	<img width="150" height="608" alt="image" src="https://github.com/user-attachments/assets/6c05ed74-eeb7-4934-85cd-ea8fd7ab3c10" />
+</p>
+
 
 `FuncA`이 호출되고 나면, `classA`와 `classB`의 관계는 사라지게 된다.
 
@@ -93,6 +102,10 @@ int main()
 
 클래스가 순수 가상함수(=인터페이스의 동작)들을 실제로 구현할 때 사용된다.
 
+<p align="center">
+	<img width="150" height="564" alt="image" src="https://github.com/user-attachments/assets/6c7bc916-a6c0-40f4-a235-d03e0412ecfe" />
+</p>
+
 <details>
     <summary>C++ 코드</summary>
 
@@ -131,7 +144,10 @@ int main()
 
 또한 연관 관계는 객체 간의 의존성을 나타내며, 객체 간의 수명 주기의 종속성은 없다.
 
-<사진첨부>
+<p align="center">
+	<img width="100" height="583" alt="image" src="https://github.com/user-attachments/assets/56d40b73-573f-48db-b787-d34b210cee7e" />
+</p>
+
 
 Teacher → Student인 경우, Teacher가 Student의 public 속성이나 operation에 접근할 수 있다.
 
@@ -159,7 +175,9 @@ public:
 
 예를 들어, 동물 클래스와 개 클래스는 상속 관계다.
 
-<사진첨부>
+<p align="center">
+	<img width="150" height="592" alt="image" src="https://github.com/user-attachments/assets/7626944c-f4c7-4865-b16d-a6fbc2688707" />
+</p>
 
 <details>
     <summary>C++ 코드</summary>
@@ -206,7 +224,9 @@ Aggregation 관계는 한 객체가 다른 객체를 포함하고, 포함된 객
 
 `School 객체가 메모리에서 사라진다고 해서 학생의 메모리가 해제되지 않는다`
 
-<사진첨부>
+<p align="center">
+	<img width="200" height="507" alt="image" src="https://github.com/user-attachments/assets/cc0ff739-1798-4224-acec-b9c2d5883ba3" />
+</p>
 
 <details>
     <summary>C++ 코드</summary>
@@ -267,7 +287,9 @@ int main()
 
 `자동차가 사라지면 엔진도 같이 사라진다`
 
-<사진첨부>
+<p align="center">
+	<img width="100" height="527" alt="image" src="https://github.com/user-attachments/assets/f8654fa6-3543-4b21-be87-9fc20ee5d759" />
+</p>
 
 <details>
     <summary>C++ 코드</summary>
@@ -314,5 +336,8 @@ int main()
 
 예를 들어, Customer는 여러 개의 Ticket을 가지고 있고, Student는 하나 이상의 Course를 가진다.
 
-<사진첨부>
+<p align="center">
+	<img width="300" height="497" alt="image" src="https://github.com/user-attachments/assets/675ccb37-2ee7-4f7a-8bde-7fe689b17fa9" />
+</p>
+
 ---
