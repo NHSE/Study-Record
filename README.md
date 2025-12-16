@@ -28,3 +28,9 @@
 | PROBLEM 4 | ➡️ [바로가기](./Postgre%20SQL/PROBLEM/PROBLEM_4.md) |
 
 ---
+
+## 🗂️ UML — 개념 정리
+| 챕터 | 내용 | 바로가기 |
+|------|--------|-----------|
+| CHAPTER 1 | 클래스 다이어그램 (Class Diagream) | ➡️ [바로가기](./UML/CHAPTER%201/CHAPTER_1.md) |
+---
