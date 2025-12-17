@@ -7,11 +7,15 @@
 - 전체 모듈의 구조적 관계 파악에 용이
 - 관련된 것들을 묶어서 표현하기에 용이
 
-<사진첨부>
+<p align="center">
+    <img width="420" height="623" alt="image" src="https://github.com/user-attachments/assets/7f5b7010-0da3-4e05-8919-7466de860542" />
+</p>
 
 ## 패키지 간 관계
 
-<사진 첨부>
+<p align="center">
+    <img width="820" height="819" alt="image" src="https://github.com/user-attachments/assets/c0829686-8860-4234-b76b-f939f488d045" />
+</p>
 
 패키지 간 관계도 의존, 상속등으로 표현할 수 있으며, 스테레오 타입을 사용할 수 있음
 
@@ -115,4 +119,6 @@ public:
 ```
 
 </details>
+
+
 ---
