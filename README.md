@@ -35,4 +35,5 @@
 | CHAPTER 1 | 클래스 다이어그램 (Class Diagream) | ➡️ [바로가기](./UML/CHAPTER%201/CHAPTER_1.md) |
 | CHAPTER 2 | 패키지 다이어그램 (Package Diagream) | ➡️ [바로가기](./UML/CHAPTER%202/CHAPTER_2.md) |
 | CHAPTER 3 | 시퀀스 다이어그램 (Sequence Diagram) | ➡️ [바로가기](./UML/CHAPTER%203/CHAPTER_3.md) |
+| CHAPTER 4 | 상태 다이어그램 (Statechart Diagram) | ➡️ [바로가기](./UML/CHAPTER%204/CHAPTER_4.md) |
 ---
