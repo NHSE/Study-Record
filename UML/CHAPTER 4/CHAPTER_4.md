@@ -7,13 +7,17 @@
 
 ## 상태 다이어그램 구성 요소
 
-<사진첨부>
+<p align="center">
+<img width="800" height="1000" alt="image" src="https://github.com/user-attachments/assets/a1af7a75-4d0e-431c-85f7-25c6755d1d8a" />
+</p>
+
 
 |요소|	description |
 |--------|-------------|
 |State |	 시스템 또는 객체가 가질 수 있는 다양한 상태를 표시|
 |Event |	 시스템 또는 객체가 상태 변화를 일으키는 사건|
 |Transition |	 상태 간의 변화|
+
 
 |state operation | description |
 |--------|-------------|
@@ -22,8 +26,14 @@
 |exit|	 현재 state를 유지하고 있을 때 실행하는 action|
 
 
-예시 )
-하기 그림에서 S1 상태로 진입하게 된다면 entry에 의해 x = 1로 설정된다.
+<details>
+    <summary>예시</summary>
+
+<p align="center">
+<img width="600" height="203" alt="image" src="https://github.com/user-attachments/assets/a01bd009-ac57-4394-bb51-5c448ac30baf" />
+</p>
+
+상기 그림에서 S1 상태로 진입하게 된다면 entry에 의해 x = 1로 설정된다.
 
 그리고 event가 발생한다고 가정하자.
 
@@ -33,7 +43,7 @@ event 조건 x <= 2를 만족하기 때문에 S1 상태에서 exit 하게 되어
 
 event에 의해 S2 상태로 진입하였으므로, entry x += 5에 의해 최종적으로 x = 9가 된다.
 
-<사진첨부>
+</details>
 
 ## OR State
 
@@ -47,6 +57,13 @@ event에 의해 S2 상태로 진입하였으므로, entry x += 5에 의해 최�
 
 동시에 하나만 존재 가능
 
+<p align="center">
+<img width="250" height="1050" alt="image" src="https://github.com/user-attachments/assets/1945c996-487c-4fa6-b312-0a8e94f2bf99" />
+</p>
+
+<details>
+    <summary>C++ 코드</summary>
+    
 ```cpp
 #include <iostream>
 
@@ -101,6 +118,7 @@ private:
 };
 ```
 
+</details>
 
 ## AND State
 
@@ -116,6 +134,13 @@ MotorState : On / Off
 
 DoorState : Open / Closed
 
+<p align="center">
+<img width="400" height="1125" alt="image" src="https://github.com/user-attachments/assets/40e66266-1396-4a38-b550-cba8789cc699" />
+</p>
+
+<details>
+    <summary>C++ 코드</summary>
+    
 ```cpp
 #include <iostream>
 
@@ -164,4 +189,7 @@ private:
     DoorState doorState;   // AND state ②
 };
 ```
+
+</details>
+
 ---
