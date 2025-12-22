@@ -4,7 +4,9 @@
 - 로직, 절차, 흐름을 기술 (플로우 차트와 유사)
 - 업무 프로세스, 코드 실행 로직을 표현할 때 주로 사용
 
-<사진첨부>
+<p align="center">
+<img width="400" height="679" alt="image" src="https://github.com/user-attachments/assets/0aac7fa7-61fe-474a-95ca-b95249858f58" />
+</p>
 
 <details>
     <summary>C++ 코드</summary>
@@ -54,7 +56,9 @@ int main() {
 
 ## 📌 분기 처리
 
-<사진첨부>
+<p align="center">
+<img width="450" height="563" alt="image" src="https://github.com/user-attachments/assets/6d3654d5-9faa-454a-bc17-5eb0cc93b346" />
+</p>
 
 - Decision Node에서 조건에 따라 흐름이 분기
 
@@ -122,7 +126,9 @@ int main() {
 
 ## 📌 병렬 처리
 
-<사진첨부>
+<p align="center">
+<img width="400" height="481" alt="image" src="https://github.com/user-attachments/assets/c4b8e558-96b5-4bac-a032-305990972395" />
+</p>
 
 - Fork Node에서 하나의 흐름을 여러 개의 병렬 흐름으로 분기
 
@@ -178,7 +184,10 @@ int main() {
 
 ## 📌 파티션 처리
 
-<사진첨부>
+<p align="center">
+<img width="400" height="562" alt="image" src="https://github.com/user-attachments/assets/88e6eabd-3ab6-4a06-a682-3bb0c630d7d0" />
+</p>
+
 
 - 파티션은 “누가 이 작업을 수행하는가” 를 표현
 
