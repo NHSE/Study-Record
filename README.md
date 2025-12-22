@@ -36,5 +36,5 @@
 | CHAPTER 2 | 패키지 다이어그램 (Package Diagream) | ➡️ [바로가기](./UML/CHAPTER%202/CHAPTER_2.md) |
 | CHAPTER 3 | 시퀀스 다이어그램 (Sequence Diagram) | ➡️ [바로가기](./UML/CHAPTER%203/CHAPTER_3.md) |
 | CHAPTER 4 | 상태 다이어그램 (Statechart Diagram) | ➡️ [바로가기](./UML/CHAPTER%204/CHAPTER_4.md) |
-| CHAPTER 4 | 활동 다이어그램 (Activity Diagram) | ➡️ [바로가기](./UML/CHAPTER%205/CHAPTER_5.md) |
+| CHAPTER 5 | 활동 다이어그램 (Activity Diagram) | ➡️ [바로가기](./UML/CHAPTER%205/CHAPTER_5.md) |
 ---
