@@ -112,15 +112,10 @@ struct IPointService {
 // 모바일 API 구현
 class MobileAPI : public IMobileAPI {
     IExternalPG* pg;   // 외부 PG 의존
+    IPointService* point;   // 포인트 의존
 public:
-    MobileAPI(IExternalPG* pg) : pg(pg) {}
+    MobileAPI(IExternalPG* pg,  IPointService* point) : pg(pg), point(point) {}
     void process() override {}
-};
-
-// 포인트 서비스
-class PointService : public IPointService {
-public:
-    void usePoint() override {}
 };
 
 // API 프록시
