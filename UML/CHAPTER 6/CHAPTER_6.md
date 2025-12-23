@@ -6,14 +6,21 @@
 - 클래스는 상태와 동작을 정의, 컴포넌트는 시스템의 더 큰 단위로 여러 클래스와 리소스, 더 높은 수준의 추상화를 포함
 - 각 시스템의 물리적 구성 요소 간의 의존성 표현
 
-<사진첨부>
+<p align="center">
+<img width="500" height="640" alt="image" src="https://github.com/user-attachments/assets/e8d7b8b3-884e-4e39-b5c8-0de3f03eeee3" />
+</p>
 
-##  컴포넌트 다이어그램 구성요소
+##  컴포넌트 다이어그램 표현
 
 **📌 컴포넌트 간 인터페이스 기반 의존 관계 표현**
 
-<사진첨부>
+<p align="center">
+<img width="700" height="411" alt="image" src="https://github.com/user-attachments/assets/f715d7ec-b041-4458-94e3-f9ead43d0880" />
+</p>
 
+<details>
+    <summary>C++ 코드</summary>
+    
 ```cpp
 // 제공되는 인터페이스
 class ITrackingQuery {
@@ -79,7 +86,9 @@ public:
 
 **📌 프로세스간 관계 표현**
 
-<사진첨부>
+<p align="center">
+<img width="500" height="564" alt="image" src="https://github.com/user-attachments/assets/ea420eb4-0e61-457f-a415-288dbe944911" />
+</p>
 
 <details>
     <summary>C++ 코드</summary>
